@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prisuppskattning – S&G Trädgårdservice</title>
+<meta name="description" content="Få en kostnadsfri prisuppskattning för trädgårdsskötsel, gräsklippning eller snöröjning på under 2 minuter." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/png" href="logo.png">
+<style>
+  .estimator{padding:60px 5vw 100px;background:var(--bone)}
+  .estimator__inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start}
+
+  /* PROGRESS */
+  .progress{
+    background:#fff;border:1px solid var(--border);border-radius:10px;
+    padding:32px;margin-bottom:24px;
+  }
+  .progress__steps{display:flex;gap:8px;margin-bottom:0}
+  .progress__step{flex:1;height:5px;border-radius:99px;background:var(--border);transition:background .4s}
+  .progress__step.active{background:var(--rose)}
+  .progress__step.done{background:var(--moss)}
+  .progress__label{font-size:.82rem;color:var(--slate);margin-top:14px;display:flex;justify-content:space-between;align-items:center}
+  .progress__label strong{color:var(--forest);font-family:'Inter',sans-serif}
+
+  /* CARD */
+  .step-card{
+    background:#fff;border:1px solid var(--border);border-radius:10px;
+    padding:48px;
+  }
+  .step-card h2{font-size:clamp(1.6rem,2.5vw,2.2rem);margin-bottom:10px}
+  .step-card>p{color:var(--slate);margin-bottom:32px}
+
+  /* SERVICE CHOICE */
+  .choice-grid{display:grid;gap:14px}
+  .choice{
+    border:2px solid var(--border);border-radius:8px;padding:22px;cursor:pointer;
+    display:flex;gap:18px;align-items:center;
+    transition:border-color .2s, background .2s;
+  }
+  .choice:hover{border-color:var(--rose);background:#fffafb}
+  .choice.selected{border-color:var(--rose);background:#fffafb}
+  .choice__icon{
+    width:54px;height:54px;border-radius:8px;background:var(--cream);
+    display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;
+  }
+  .choice.selected .choice__icon{background:var(--rose);color:#fff}
+  .choice h4{font-size:1.1rem;color:var(--forest);margin-bottom:4px;font-family:'Inter',sans-serif;font-weight:600}
+  .choice p{font-size:.88rem;color:var(--slate);margin:0}
+
+  /* FORM FIELDS */
+  .field{margin-bottom:20px}
+  .field label{display:block;font-size:.85rem;font-weight:600;color:var(--forest);margin-bottom:8px}
+  .field input,.field select,.field textarea{
+    width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:6px;
+    font-family:inherit;font-size:.96rem;color:var(--ink);background:var(--bone);
+    transition:border-color .2s, background .2s;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{
+    outline:none;border-color:var(--rose);background:#fff;
+  }
+  .field textarea{min-height:90px;resize:vertical}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+  /* TOGGLE BUTTONS */
+  .toggle-group{display:grid;grid-template-columns:repeat(auto-fit, minmax(140px,1fr));gap:10px}
+  .toggle{
+    padding:14px;border:1.5px solid var(--border);border-radius:6px;
+    background:var(--bone);cursor:pointer;text-align:center;
+    font-size:.93rem;color:var(--forest);font-weight:500;
+    transition:border-color .2s, background .2s, color .2s;
+  }
+  .toggle:hover{border-color:var(--rose)}
+  .toggle.selected{background:var(--rose);color:#fff;border-color:var(--rose)}
+  .toggle small{display:block;font-size:.78rem;opacity:.7;margin-top:2px;font-weight:400}
+
+  /* SIZE SLIDER */
+  .slider-wrap{margin:24px 0}
+  .slider-val{
+    font-family:'Fraunces',serif;font-size:2.6rem;color:var(--forest);font-weight:500;
+    text-align:center;margin-bottom:8px;line-height:1;
+  }
+  .slider-val small{font-size:1.1rem;color:var(--slate);font-weight:400}
+  .slider-label{text-align:center;color:var(--slate);font-size:.88rem;margin-bottom:18px}
+  input[type=range]{width:100%;accent-color:var(--rose)}
+  .slider-ticks{display:flex;justify-content:space-between;font-size:.76rem;color:var(--slate);margin-top:4px}
+
+  /* CHECKBOX EXTRAS */
+  .extras{display:grid;gap:10px}
+  .extra{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:14px 18px;border:1.5px solid var(--border);border-radius:6px;
+    background:var(--bone);cursor:pointer;transition:border-color .2s, background .2s;
+  }
+  .extra:hover{border-color:var(--rose)}
+  .extra.selected{border-color:var(--rose);background:#fffafb}
+  .extra__name{font-weight:500;color:var(--forest);font-size:.95rem}
+  .extra__name small{display:block;font-size:.82rem;color:var(--slate);font-weight:400;margin-top:2px}
+  .extra__check{
+    width:22px;height:22px;border:2px solid var(--border);border-radius:5px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;color:#fff;background:#fff;
+    transition:background .2s, border-color .2s;
+  }
+  .extra.selected .extra__check{background:var(--rose);border-color:var(--rose)}
+  .extra.selected .extra__check::after{content:"✓";font-size:.85rem;font-weight:700}
+
+  /* NAVIGATION */
+  .step-nav{display:flex;justify-content:space-between;gap:12px;margin-top:36px;padding-top:24px;border-top:1px solid var(--border)}
+  .btn--back{background:transparent;color:var(--slate);border:1.5px solid var(--border)}
+  .btn--back:hover{background:var(--cream);color:var(--forest)}
+
+  /* SIDEBAR — LIVE QUOTE */
+  .quote-sidebar{
+    position:sticky;top:100px;background:var(--forest);color:#fff;
+    border-radius:10px;padding:36px;
+  }
+  .quote-sidebar h3{color:#fff;font-size:1.2rem;margin-bottom:6px;font-family:'Inter',sans-serif;font-weight:600;letter-spacing:.02em}
+  .quote-sidebar__sub{color:rgba(255,255,255,.65);font-size:.88rem;margin-bottom:24px}
+  .quote__total{
+    font-family:'Fraunces',serif;font-size:3.2rem;color:#fff;font-weight:500;line-height:1;margin-bottom:6px;
+  }
+  .quote__total small{font-size:1.4rem;color:var(--sage);font-weight:400}
+  .quote__period{color:var(--sage);font-size:.88rem;margin-bottom:6px}
+  .quote__range{color:rgba(255,255,255,.55);font-size:.82rem}
+  .quote__line{height:1px;background:rgba(255,255,255,.15);margin:24px 0}
+  .quote__items{list-style:none;font-size:.9rem}
+  .quote__items li{
+    display:flex;justify-content:space-between;padding:6px 0;
+    color:rgba(255,255,255,.85);
+  }
+  .quote__items li.empty{color:rgba(255,255,255,.4);font-style:italic;text-align:center;display:block;padding:14px 0}
+  .quote__items li span:last-child{color:#fff;font-weight:500}
+  .quote__note{
+    margin-top:24px;font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.55;
+    padding-top:18px;border-top:1px solid rgba(255,255,255,.15);
+  }
+  .rut{
+    margin-top:18px;background:rgba(216,122,138,.15);border:1px solid rgba(216,122,138,.4);
+    border-radius:6px;padding:14px 18px;font-size:.86rem;color:#fff;
+  }
+  .rut strong{color:var(--rose);display:block;margin-bottom:3px;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase}
+
+  /* SUMMARY (final) */
+  .summary-box{background:var(--cream);border-radius:8px;padding:24px;margin-bottom:24px}
+  .summary-box h4{font-family:'Inter',sans-serif;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:12px;font-weight:600}
+  .summary-box ul{list-style:none}
+  .summary-box li{padding:6px 0;display:flex;justify-content:space-between;font-size:.93rem;color:var(--slate);border-bottom:1px solid var(--border)}
+  .summary-box li:last-child{border-bottom:none}
+  .summary-box li strong{color:var(--forest);font-weight:600}
+
+  /* SUCCESS */
+  .success{
+    background:#fff;border:1px solid var(--border);border-radius:10px;padding:60px 40px;text-align:center;
+  }
+  .success__icon{
+    width:80px;height:80px;border-radius:50%;background:var(--moss);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 24px;
+    color:#fff;font-size:2.4rem;
+  }
+  .success h2{font-size:2rem;margin-bottom:14px}
+  .success p{color:var(--slate);margin-bottom:8px}
+  .success__price{
+    font-family:'Fraunces',serif;font-size:2.6rem;color:var(--forest);font-weight:500;
+    margin:24px 0;
+  }
+  .success__buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+
+  @media (max-width:960px){
+    .estimator__inner{grid-template-columns:1fr}
+    .quote-sidebar{position:static;order:-1}
+    .step-card{padding:30px}
+    .field-row{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav__logo">
+    <img src="logo.png" alt="S&G Trädgårdservice logotyp">
+    <span class="nav__logo-text">S&G Trädgårdservice<small>Stockholm</small></span>
+  </a>
+  <ul class="nav__menu">
+    <li><a href="index.html">Hem</a></li>
+    <li><a href="tjanster.html">Tjänster</a></li>
+    <li><a href="offert.html" class="active">Prisuppskattning</a></li>
+    <li><a href="kontakt.html">Kontakt</a></li>
+  </ul>
+  <a href="tel:0736755564" class="nav__cta">📞 0736 - 755 564</a>
+  <button class="nav__burger" id="burger" aria-label="Öppna meny"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav__mobile" id="mobileMenu">
+  <a href="index.html">Hem</a><a href="tjanster.html">Tjänster</a>
+  <a href="offert.html">Prisuppskattning</a><a href="kontakt.html">Kontakt</a>
+  <a href="tel:0736755564" class="cta">Ring 0736 - 755 564</a>
+</div>
+
+<header class="page-header">
+  <div class="page-header__inner">
+    <div class="page-header__crumbs"><a href="index.html">Hem</a> / Prisuppskattning</div>
+    <h1>Få ett <em>pris på 2 minuter</em></h1>
+    <p class="page-header__sub">Vår prisuppskattare ger dig ett första riktpris baserat på tjänst, storlek och frekvens. Den slutgiltiga offerten bekräftar vi efter platsbesök – alltid kostnadsfritt.</p>
+  </div>
+</header>
+
+<section class="estimator">
+  <div class="estimator__inner">
+
+    <!-- LEFT: stepped form -->
+    <div>
+      <div class="progress">
+        <div class="progress__steps">
+          <div class="progress__step active" data-step="1"></div>
+          <div class="progress__step" data-step="2"></div>
+          <div class="progress__step" data-step="3"></div>
+          <div class="progress__step" data-step="4"></div>
+        </div>
+        <div class="progress__label">
+          <span>Steg <strong id="stepNum">1</strong> av 4</span>
+          <span id="stepName">Välj tjänst</span>
+        </div>
+      </div>
+
+      <!-- STEP 1: Service -->
+      <div class="step-card" id="step1">
+        <h2>Vilken tjänst behöver du?</h2>
+        <p>Välj det område som passar bäst. Du kan ändra senare.</p>
+
+        <div class="choice-grid">
+          <div class="choice" data-service="grasklippning">
+            <div class="choice__icon">🌿</div>
+            <div>
+              <h4>Gräsklippning</h4>
+              <p>Regelbunden klippning, skötselavtal, kantklippning.</p>
+            </div>
+          </div>
+          <div class="choice" data-service="tradgardsskotsel">
+            <div class="choice__icon">🌳</div>
+            <div>
+              <h4>Trädgårdsskötsel</h4>
+              <p>Trädvård, beskärning, plantering, anläggning.</p>
+            </div>
+          </div>
+          <div class="choice" data-service="snorojning">
+            <div class="choice__icon">❄️</div>
+            <div>
+              <h4>Snöröjning</h4>
+              <p>Snöskottning, plogning, sandning, takskottning.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <span></span>
+          <button class="btn btn--primary" onclick="goto(2)" id="next1" disabled style="opacity:.5">Fortsätt →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Size / Scope -->
+      <div class="step-card" id="step2" style="display:none">
+        <h2 id="step2Title">Hur stor är ytan?</h2>
+        <p id="step2Sub">Ange ungefärlig storlek – exakta mått tar vi vid platsbesök.</p>
+
+        <div class="slider-wrap">
+          <div class="slider-val"><span id="sizeVal">200</span><small id="sizeUnit"> kvm</small></div>
+          <div class="slider-label" id="sizeLabel">Mellanstor villatomt</div>
+          <input type="range" id="sizeRange" min="20" max="3000" value="200" step="10">
+          <div class="slider-ticks">
+            <span>20 kvm</span>
+            <span>1 000 kvm</span>
+            <span>3 000+ kvm</span>
+          </div>
+        </div>
+
+        <div class="field" id="frequencyField">
+          <label>Hur ofta?</label>
+          <div class="toggle-group" id="frequencyToggles">
+            <!-- filled by JS -->
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn btn--back" onclick="goto(1)">← Tillbaka</button>
+          <button class="btn btn--primary" onclick="goto(3)">Fortsätt →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Extras -->
+      <div class="step-card" id="step3" style="display:none">
+        <h2>Vill du lägga till något?</h2>
+        <p>Välj tilläggstjänster som ofta kombineras med din valda tjänst.</p>
+
+        <div class="extras" id="extrasList">
+          <!-- filled by JS -->
+        </div>
+
+        <div class="step-nav">
+          <button class="btn btn--back" onclick="goto(2)">← Tillbaka</button>
+          <button class="btn btn--primary" onclick="goto(4)">Fortsätt →</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: Contact -->
+      <div class="step-card" id="step4" style="display:none">
+        <h2>Vart skickar vi offerten?</h2>
+        <p>Vi behöver några kontaktuppgifter för att kunna skicka en bekräftad offert och boka in ett kostnadsfritt platsbesök.</p>
+
+        <div class="summary-box">
+          <h4>Sammanfattning</h4>
+          <ul id="summaryList"></ul>
+        </div>
+
+        <form onsubmit="return submitQuote(event)">
+          <div class="field-row">
+            <div class="field">
+              <label for="qName">Namn *</label>
+              <input id="qName" type="text" required placeholder="För- och efternamn">
+            </div>
+            <div class="field">
+              <label for="qPhone">Telefon *</label>
+              <input id="qPhone" type="tel" required placeholder="0700 - 000 000">
+            </div>
+          </div>
+          <div class="field">
+            <label for="qEmail">E-post *</label>
+            <input id="qEmail" type="email" required placeholder="namn@exempel.se">
+          </div>
+          <div class="field">
+            <label for="qAddress">Adress där tjänsten ska utföras *</label>
+            <input id="qAddress" type="text" required placeholder="Gatuadress, postnummer, ort">
+          </div>
+          <div class="field">
+            <label for="qNotes">Övrig information (valfritt)</label>
+            <textarea id="qNotes" placeholder="Önskat startdatum, särskilda förutsättningar, bilder kan skickas till info@sgtradgardsservice.se..."></textarea>
+          </div>
+
+          <div class="step-nav">
+            <button type="button" class="btn btn--back" onclick="goto(3)">← Tillbaka</button>
+            <button type="submit" class="btn btn--primary">Skicka offertförfrågan →</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success" id="successCard" style="display:none">
+        <div class="success__icon">✓</div>
+        <h2>Tack för din förfrågan!</h2>
+        <p>Vi har tagit emot din prisuppskattning och kontaktar dig inom <strong>24 timmar</strong> på vardagar.</p>
+        <div class="success__price"><span id="finalPrice">0</span> kr <span style="font-size:1rem;color:var(--slate)">/<span id="finalPeriod">period</span></span></div>
+        <p style="font-size:.88rem;color:var(--slate);max-width:480px;margin:0 auto">
+          Detta är en preliminär uppskattning. Den slutgiltiga offerten bekräftar vi efter kostnadsfritt platsbesök. Priset inkluderar inte moms (25%).
+        </p>
+        <div class="success__buttons">
+          <a href="tel:0736755564" class="btn btn--primary">📞 Ring oss direkt</a>
+          <a href="index.html" class="btn btn--outline">Tillbaka till start</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: live quote sidebar -->
+    <aside class="quote-sidebar">
+      <h3>Din prisuppskattning</h3>
+      <p class="quote-sidebar__sub">Uppdateras medan du fyller i</p>
+
+      <div class="quote__total"><span id="priceTotal">—</span> <small id="priceUnit">kr</small></div>
+      <div class="quote__period" id="pricePeriod">Välj tjänst för att börja</div>
+      <div class="quote__range" id="priceRange"></div>
+
+      <div class="quote__line"></div>
+
+      <ul class="quote__items" id="quoteItems">
+        <li class="empty">Inga val ännu</li>
+      </ul>
+
+      <div class="rut" id="rutBox" style="display:none">
+        <strong>RUT-avdrag</strong>
+        Som privatperson kan du dra av 50% på arbetskostnaden direkt på fakturan (max 75 000 kr/år).
+      </div>
+
+      <div class="quote__note">
+        Priset är en uppskattning baserad på ditt val och inkluderar inte moms. Slutpriset bekräftas efter kostnadsfritt platsbesök. Pris kan justeras utifrån tillgänglighet, vegetation och särskilda förutsättningar.
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer__grid">
+    <div class="footer__brand">
+      <h3>S<span>&</span>G Trädgårdservice</h3>
+      <p>Komplett trädgårds- och markföretag i södra Stockholm.</p>
+      <div class="footer__social"><a href="https://www.facebook.com/61559721701689/mentions/" target="_blank" rel="noopener">f</a><a href="https://www.instagram.com/sg_tradgardsservice/" target="_blank" rel="noopener">◉</a><a href="https://www.tiktok.com/@sgtradgardsservice" target="_blank" rel="noopener">▶</a></div>
+    </div>
+    <div class="footer__col">
+      <h4>Tjänster</h4>
+      <ul>
+        <li><a href="tradgardsskotsel.html">Trädgårdsskötsel</a></li>
+        <li><a href="grasklippning.html">Gräsklippning</a></li>
+        <li><a href="snorojning.html">Snöröjning</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Områden</h4>
+      <ul>
+        <li>Göteborg</li><li>Mölndal</li>
+        <li>Partille</li><li>Öckerö</li>
+      </ul>
+    </div>
+    <div class="footer__col footer__contact">
+      <h4>Kontakt</h4>
+      <ul>
+        <li><span class="icon">📍</span> Blidvädersgatan 41D, 41830 Göteborg</li>
+        <li><span class="icon">📞</span> <a href="tel:0736755564">0736 - 755 564</a></li>
+        <li><span class="icon">✉</span> <a href="mailto:info@sgtradgardsservice.se">info@sgtradgardsservice.se</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom"><div>© 2026 S&G Trädgårdservice</div><div>Göteborg, Sverige</div></div>
+</footer>
+
+<script>
+/* =========================================
+   PRICING ENGINE
+   All prices are estimates in SEK ex VAT.
+   ========================================= */
+const SERVICES = {
+  grasklippning: {
+    name: 'Gräsklippning',
+    icon: '🌿',
+    sizeUnit: 'kvm',
+    sizeMin: 20, sizeMax: 3000, sizeDefault: 200,
+    sizeLabels: [
+      {max:60,  label:'Mindre villatomt'},
+      {max:200, label:'Mellanstor villatomt'},
+      {max:600, label:'Större villatomt'},
+      {max:1500,label:'BRF / större grönyta'},
+      {max:9999,label:'Fastighet / kommersiell yta'}
+    ],
+    // Base per visit in kr ex moms: setup cost + per-kvm
+    base: 450,     // travel + setup
+    perSqm: 1.8,   // kr per kvm
+    frequencies: [
+      {id:'once', label:'Engångsbesök', sub:'En klippning', visitsPerYear:1, mult:1.0},
+      {id:'biweek', label:'Varannan vecka', sub:'~12 klippningar/säsong', visitsPerYear:12, mult:0.88},
+      {id:'weekly', label:'Varje vecka', sub:'~22 klippningar/säsong', visitsPerYear:22, mult:0.82},
+      {id:'monthly', label:'Månadsvis', sub:'~6 klippningar/säsong', visitsPerYear:6, mult:0.95}
+    ],
+    defaultFreq: 'biweek',
+    period: 'per säsong',
+    extras: [
+      {id:'kant', label:'Kantklippning', sub:'Trimning av kanter', price:250, perVisit:true},
+      {id:'gods', label:'Gödsling 2x/säsong', sub:'Vår + höst', price:1200, perVisit:false},
+      {id:'vert', label:'Vertikalskärning', sub:'Borttagning av mossa', price:1800, perVisit:false},
+      {id:'bort', label:'Bortforsling av gräs', sub:'Vi tar med gräset', price:150, perVisit:true}
+    ]
+  },
+  tradgardsskotsel: {
+    name: 'Trädgårdsskötsel',
+    icon: '🌳',
+    sizeUnit: 'timmar',
+    sizeMin: 2, sizeMax: 80, sizeDefault: 8,
+    sizeLabels: [
+      {max:4,  label:'Mindre uppdrag'},
+      {max:10, label:'Standarduppdrag'},
+      {max:25, label:'Större projekt'},
+      {max:50, label:'Omfattande projekt'},
+      {max:9999,label:'Större anläggning'}
+    ],
+    base: 650,
+    perSqm: 595, // kr/timme
+    frequencies: [
+      {id:'engang', label:'Engångsuppdrag', sub:'Enskild insats', visitsPerYear:1, mult:1.0},
+      {id:'sasong', label:'Vår + höst', sub:'2 tillfällen/år', visitsPerYear:2, mult:0.95},
+      {id:'lopande', label:'Löpande skötsel', sub:'4-6 ggr/år', visitsPerYear:5, mult:0.88}
+    ],
+    defaultFreq: 'engang',
+    period: 'totalt',
+    extras: [
+      {id:'tradf', label:'Trädfällning', sub:'Per träd, inkl. bortforsling', price:2800, perVisit:false},
+      {id:'stubb', label:'Stubbfräsning', sub:'Borttagning av stubbe', price:1500, perVisit:false},
+      {id:'platt', label:'Plattläggning (per kvm)', sub:'Granit/skiffer/betong', price:1850, perVisit:false},
+      {id:'plant', label:'Plantering av växter', sub:'Inkl. jord & gödsel', price:1200, perVisit:false},
+      {id:'dran', label:'Dränering', sub:'Bedöms vid besök', price:6500, perVisit:false}
+    ]
+  },
+  snorojning: {
+    name: 'Snöröjning',
+    icon: '❄️',
+    sizeUnit: 'kvm',
+    sizeMin: 30, sizeMax: 5000, sizeDefault: 300,
+    sizeLabels: [
+      {max:80,  label:'Garageuppfart / mindre yta'},
+      {max:300, label:'Villaområde / mindre BRF'},
+      {max:1000,label:'BRF / parkering'},
+      {max:3000,label:'Större fastighet'},
+      {max:9999,label:'Kommersiell anläggning'}
+    ],
+    base: 380,
+    perSqm: 0.9,
+    frequencies: [
+      {id:'akut', label:'Akut / engångs', sub:'Vid behov', visitsPerYear:1, mult:1.25},
+      {id:'avtal', label:'Säsongsavtal', sub:'Vid varje snöfall', visitsPerYear:18, mult:0.85},
+      {id:'jour', label:'24/7 jour', sub:'Hela vintersäsongen', visitsPerYear:22, mult:1.0}
+    ],
+    defaultFreq: 'avtal',
+    period: 'per säsong',
+    extras: [
+      {id:'sand', label:'Sandning vid varje besök', sub:'Halkbekämpning', price:120, perVisit:true},
+      {id:'tak',  label:'Takskottning', sub:'Per uppdrag, bedöms vid besök', price:4500, perVisit:false},
+      {id:'istap',label:'Istappborttagning', sub:'Per uppdrag', price:1800, perVisit:false},
+      {id:'salt', label:'Saltning', sub:'Vid kraftig halka', price:90, perVisit:true}
+    ]
+  }
+};
+
+let state = {
+  step:1,
+  service:null,
+  size:0,
+  frequency:null,
+  extras:[]
+};
+
+/* ============ Navigation ============ */
+function goto(n){
+  // validation
+  if(n>1 && !state.service) return;
+  state.step=n;
+  for(let i=1;i<=4;i++){
+    document.getElementById('step'+i).style.display = (i===n?'block':'none');
+  }
+  document.getElementById('successCard').style.display='none';
+
+  // progress
+  document.querySelectorAll('.progress__step').forEach(el=>{
+    const s=parseInt(el.dataset.step);
+    el.classList.remove('active','done');
+    if(s<n) el.classList.add('done');
+    if(s===n) el.classList.add('active');
+  });
+  document.getElementById('stepNum').textContent=n;
+  const names=['Välj tjänst','Storlek & frekvens','Tillägg','Kontakt'];
+  document.getElementById('stepName').textContent=names[n-1];
+
+  if(n===2) renderStep2();
+  if(n===3) renderStep3();
+  if(n===4) renderSummary();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ============ Step 1: choose service ============ */
+document.querySelectorAll('.choice').forEach(el=>{
+  el.addEventListener('click',()=>{
+    document.querySelectorAll('.choice').forEach(c=>c.classList.remove('selected'));
+    el.classList.add('selected');
+    state.service=el.dataset.service;
+    state.size = SERVICES[state.service].sizeDefault;
+    state.frequency = SERVICES[state.service].defaultFreq;
+    state.extras=[];
+    const btn=document.getElementById('next1');
+    btn.disabled=false; btn.style.opacity=1;
+    updateQuote();
+  });
+});
+
+// pre-select if ?service= in URL
+const params=new URLSearchParams(location.search);
+if(params.get('service')){
+  const el=document.querySelector(`.choice[data-service="${params.get('service')}"]`);
+  if(el) el.click();
+}
+
+/* ============ Step 2 ============ */
+function renderStep2(){
+  const cfg=SERVICES[state.service];
+  document.getElementById('step2Title').textContent = cfg.sizeUnit==='timmar'
+    ? 'Hur omfattande är uppdraget?'
+    : 'Hur stor är ytan?';
+  document.getElementById('step2Sub').textContent = cfg.sizeUnit==='timmar'
+    ? 'Uppskatta hur många timmars arbete som behövs.'
+    : 'Ange ungefärlig yta som ska skötas.';
+
+  const range=document.getElementById('sizeRange');
+  range.min=cfg.sizeMin; range.max=cfg.sizeMax; range.value=state.size;
+  document.getElementById('sizeUnit').textContent=' '+cfg.sizeUnit;
+  updateSizeDisplay();
+
+  range.oninput=()=>{
+    state.size=parseInt(range.value);
+    updateSizeDisplay();
+    updateQuote();
+  };
+
+  // frequency
+  const ft=document.getElementById('frequencyToggles');
+  ft.innerHTML='';
+  cfg.frequencies.forEach(f=>{
+    const div=document.createElement('div');
+    div.className='toggle'+(state.frequency===f.id?' selected':'');
+    div.innerHTML=`${f.label}<small>${f.sub}</small>`;
+    div.onclick=()=>{
+      state.frequency=f.id;
+      ft.querySelectorAll('.toggle').forEach(t=>t.classList.remove('selected'));
+      div.classList.add('selected');
+      updateQuote();
+    };
+    ft.appendChild(div);
+  });
+}
+function updateSizeDisplay(){
+  const cfg=SERVICES[state.service];
+  document.getElementById('sizeVal').textContent=state.size;
+  for(const l of cfg.sizeLabels){
+    if(state.size<=l.max){document.getElementById('sizeLabel').textContent=l.label;break}
+  }
+}
+
+/* ============ Step 3 ============ */
+function renderStep3(){
+  const cfg=SERVICES[state.service];
+  const list=document.getElementById('extrasList');
+  list.innerHTML='';
+  cfg.extras.forEach(ex=>{
+    const div=document.createElement('div');
+    div.className='extra'+(state.extras.includes(ex.id)?' selected':'');
+    div.innerHTML=`
+      <div class="extra__name">${ex.label}<small>${ex.sub}</small></div>
+      <div class="extra__check"></div>
+    `;
+    div.onclick=()=>{
+      if(state.extras.includes(ex.id)){state.extras=state.extras.filter(x=>x!==ex.id)}
+      else state.extras.push(ex.id);
+      div.classList.toggle('selected');
+      updateQuote();
+    };
+    list.appendChild(div);
+  });
+}
+
+/* ============ Step 4 summary ============ */
+function renderSummary(){
+  const cfg=SERVICES[state.service];
+  const freq=cfg.frequencies.find(f=>f.id===state.frequency);
+  const ul=document.getElementById('summaryList');
+  const exs=state.extras.map(id=>cfg.extras.find(e=>e.id===id).label).join(', ')||'Inga';
+  ul.innerHTML=`
+    <li><span>Tjänst</span><strong>${cfg.name}</strong></li>
+    <li><span>Storlek</span><strong>${state.size} ${cfg.sizeUnit}</strong></li>
+    <li><span>Frekvens</span><strong>${freq?freq.label:'-'}</strong></li>
+    <li><span>Tillägg</span><strong>${exs}</strong></li>
+    <li><span>Uppskattat pris</span><strong>${calcPrice().total.toLocaleString('sv-SE')} kr / ${cfg.period.replace('per ','')}</strong></li>
+  `;
+}
+
+/* ============ PRICE CALCULATION ============ */
+function calcPrice(){
+  if(!state.service||!state.frequency) return {total:0,perVisit:0,visits:0};
+  const cfg=SERVICES[state.service];
+  const freq=cfg.frequencies.find(f=>f.id===state.frequency);
+
+  // per-visit cost
+  let perVisit = cfg.base + (cfg.perSqm * state.size);
+  perVisit = perVisit * freq.mult;
+
+  // extras per-visit
+  let extrasPerVisit=0, extrasFixed=0;
+  state.extras.forEach(id=>{
+    const ex=cfg.extras.find(e=>e.id===id);
+    if(ex.perVisit) extrasPerVisit += ex.price;
+    else extrasFixed += ex.price;
+  });
+
+  const visits = freq.visitsPerYear;
+  let total = (perVisit + extrasPerVisit) * visits + extrasFixed;
+
+  return {
+    total: Math.round(total/10)*10,
+    perVisit: Math.round(perVisit),
+    visits: visits,
+    extrasFixed: extrasFixed
+  };
+}
+
+/* ============ Update sidebar live ============ */
+function updateQuote(){
+  if(!state.service){
+    document.getElementById('priceTotal').textContent='—';
+    document.getElementById('priceUnit').textContent='kr';
+    document.getElementById('pricePeriod').textContent='Välj tjänst för att börja';
+    document.getElementById('priceRange').textContent='';
+    document.getElementById('quoteItems').innerHTML='<li class="empty">Inga val ännu</li>';
+    document.getElementById('rutBox').style.display='none';
+    return;
+  }
+  const cfg=SERVICES[state.service];
+  const p=calcPrice();
+  const low=Math.round(p.total*0.85/10)*10;
+  const high=Math.round(p.total*1.15/10)*10;
+
+  document.getElementById('priceTotal').textContent=p.total.toLocaleString('sv-SE');
+  document.getElementById('priceUnit').textContent='kr';
+  document.getElementById('pricePeriod').textContent=cfg.period;
+  document.getElementById('priceRange').textContent=`Intervall: ${low.toLocaleString('sv-SE')} – ${high.toLocaleString('sv-SE')} kr`;
+
+  const items=[];
+  items.push(`<li><span>${cfg.name}</span><span>${state.size} ${cfg.sizeUnit}</span></li>`);
+  const freq=cfg.frequencies.find(f=>f.id===state.frequency);
+  if(freq) items.push(`<li><span>Frekvens</span><span>${freq.label}</span></li>`);
+  if(p.visits>1) items.push(`<li><span>Besök/säsong</span><span>${p.visits} st</span></li>`);
+  items.push(`<li><span>Per besök</span><span>~${p.perVisit.toLocaleString('sv-SE')} kr</span></li>`);
+  state.extras.forEach(id=>{
+    const ex=cfg.extras.find(e=>e.id===id);
+    items.push(`<li><span>+ ${ex.label}</span><span>${ex.price.toLocaleString('sv-SE')} kr</span></li>`);
+  });
+  document.getElementById('quoteItems').innerHTML=items.join('');
+  document.getElementById('rutBox').style.display='block';
+}
+
+/* ============ Submit ============ */
+function submitQuote(e){
+  e.preventDefault();
+  const p=calcPrice();
+  const cfg=SERVICES[state.service];
+  document.getElementById('finalPrice').textContent=p.total.toLocaleString('sv-SE');
+  document.getElementById('finalPeriod').textContent=cfg.period.replace('per ','');
+  document.getElementById('step4').style.display='none';
+  document.getElementById('successCard').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+  return false;
+}
+
+/* ============ Burger menu ============ */
+const burger=document.getElementById('burger');
+const mobile=document.getElementById('mobileMenu');
+burger.addEventListener('click',()=>mobile.classList.toggle('open'));
+mobile.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobile.classList.remove('open')));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>S&G Trädgårdservice – Trädgård, gräsklippning & snöröjning i Stockholm</title>
+<meta name="description" content="S&G Trädgårdservice är ett komplett trädgårds- och markföretag i södra Stockholm. Trädgårdsskötsel, gräsklippning, snöröjning och anläggning – med 1–5 års garanti." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/png" href="logo.png">
+<style>
+  /* ============ HOMEPAGE-SPECIFIC ============ */
+  .hero{
+    position:relative;height:100vh;min-height:680px;overflow:hidden;
+    display:flex;align-items:center;
+  }
+  .hero__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+  .hero__overlay{
+    position:absolute;inset:0;z-index:2;
+    background:
+      linear-gradient(180deg, rgba(8,34,24,.4) 0%, rgba(8,34,24,.15) 40%, rgba(8,34,24,.85) 100%),
+      linear-gradient(90deg, rgba(8,34,24,.55) 0%, rgba(8,34,24,.05) 65%);
+  }
+  .hero__content{position:relative;z-index:3;color:#fff;padding:0 5vw;max-width:820px}
+  .hero__eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:.78rem;text-transform:uppercase;letter-spacing:.28em;
+    margin-bottom:28px;opacity:.95;
+    animation:fadeUp .9s ease both;
+  }
+  .hero__eyebrow::before{content:"";width:36px;height:1px;background:var(--rose)}
+  .hero__title{
+    font-size:clamp(2.6rem, 6vw, 5.4rem);
+    font-weight:500;margin-bottom:26px;color:#fff;
+    animation:fadeUp .9s ease .15s both;
+  }
+  .hero__title em{font-style:italic;color:var(--sage);font-weight:400}
+  .hero__sub{
+    font-size:1.15rem;max-width:560px;opacity:.92;margin-bottom:38px;
+    animation:fadeUp .9s ease .3s both;
+  }
+  .hero__actions{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .9s ease .45s both}
+  .hero__scroll{
+    position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+    color:#fff;z-index:3;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;
+    opacity:.7;animation:bounce 2.2s infinite;
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+  @keyframes bounce{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+  /* INTRO */
+  .intro{padding:120px 5vw}
+  .intro__grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.3fr;gap:80px;align-items:start}
+  .intro__title{font-size:clamp(2rem,3.5vw,3rem);color:var(--forest)}
+  .intro__text{font-size:1.05rem;color:var(--slate);margin-bottom:18px}
+  .intro__stats{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:40px;
+    margin-top:60px;border-top:1px solid var(--border);padding-top:40px;
+  }
+  .stat__num{font-family:'Fraunces',serif;font-size:2.6rem;color:var(--forest);font-weight:500;line-height:1}
+  .stat__label{font-size:.85rem;color:var(--moss);margin-top:6px}
+
+  /* MAIN SERVICES — 3 cards only */
+  .main-services{padding:120px 5vw;background:var(--cream)}
+  .main-services__head{max-width:1200px;margin:0 auto 60px;text-align:center}
+  .main-services__head h2{font-size:clamp(2.2rem,4vw,3.4rem);max-width:780px;margin:0 auto}
+  .main-services__grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .ms-card{
+    background:#fff;border:1px solid var(--border);border-radius:8px;
+    overflow:hidden;transition:transform .3s, box-shadow .3s;
+    display:flex;flex-direction:column;
+  }
+  .ms-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(15,61,46,.12)}
+  .ms-card__media{
+    height:220px;background:var(--moss);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;
+  }
+  .ms-card__media svg{width:78px;height:78px;color:#fff;opacity:.95}
+  .ms-card__media--leaf{background:linear-gradient(135deg,var(--moss),var(--leaf))}
+  .ms-card__media--grass{background:linear-gradient(135deg,#3a6b2f,#6ba055)}
+  .ms-card__media--snow{background:linear-gradient(135deg,#3d5a6b,#7a98ab)}
+  .ms-card__body{padding:32px;flex:1;display:flex;flex-direction:column}
+  .ms-card h3{font-size:1.5rem;margin-bottom:12px}
+  .ms-card p{color:var(--slate);font-size:.97rem;margin-bottom:20px;flex:1}
+  .ms-card__link{
+    color:var(--rose);text-decoration:none;font-weight:600;font-size:.92rem;
+    display:inline-flex;align-items:center;gap:8px;transition:gap .2s;
+  }
+  .ms-card__link:hover{gap:14px}
+
+  /* PROCESS / HOW IT WORKS */
+  .process{padding:120px 5vw;background:var(--forest);color:#fff;position:relative;overflow:hidden}
+  .process::before{
+    content:"";position:absolute;top:-150px;left:-150px;
+    width:500px;height:500px;border-radius:50%;
+    background:radial-gradient(circle,var(--moss) 0%, transparent 70%);
+    opacity:0.4;
+  }
+  .process__inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+  .process__head{text-align:center;margin-bottom:70px}
+  .process__head h2{color:#fff;font-size:clamp(2.2rem,4vw,3.4rem);max-width:780px;margin:0 auto}
+  .process__head h2 em{color:var(--rose);font-style:italic}
+  .process__steps{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+    position:relative;
+  }
+  .step{
+    padding:36px 28px;border:1px solid rgba(255,255,255,.12);border-radius:8px;
+    background:rgba(255,255,255,.03);
+    transition:background .3s, border-color .3s;
+    position:relative;
+  }
+  .step:hover{background:rgba(255,255,255,.08);border-color:var(--rose)}
+  .step__num{
+    font-family:'Fraunces',serif;font-style:italic;font-size:3rem;
+    color:var(--rose);line-height:1;margin-bottom:16px;font-weight:400;
+  }
+  .step h3{color:#fff;font-size:1.25rem;margin-bottom:10px}
+  .step p{color:rgba(255,255,255,.75);font-size:.93rem}
+
+  /* TRUST */
+  .trust{padding:120px 5vw;background:var(--bone)}
+  .trust__inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .trust__media{
+    position:relative;height:520px;border-radius:8px;overflow:hidden;
+  }
+  .trust__media video{width:100%;height:100%;object-fit:cover}
+  .trust__media::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 0%, rgba(8,34,24,.3) 100%);
+  }
+  .trust__media-badge{
+    position:absolute;bottom:24px;left:24px;z-index:2;
+    background:rgba(250,248,242,.96);backdrop-filter:blur(6px);
+    padding:16px 22px;border-radius:6px;
+    display:flex;align-items:center;gap:14px;
+  }
+  .trust__media-badge strong{font-family:'Fraunces',serif;font-size:1.6rem;color:var(--forest);font-weight:500;line-height:1}
+  .trust__media-badge span{font-size:.82rem;color:var(--slate)}
+  .trust__title{font-size:clamp(2rem,3.5vw,2.8rem);margin-bottom:24px}
+  .trust__text{font-size:1.05rem;color:var(--slate);margin-bottom:20px}
+  .trust__list{list-style:none;margin-top:30px}
+  .trust__list li{
+    padding:14px 0;border-bottom:1px solid var(--border);
+    display:flex;align-items:flex-start;gap:16px;
+  }
+  .trust__list li:last-child{border-bottom:none}
+  .trust__list .check{
+    width:32px;height:32px;border-radius:50%;background:var(--rose);
+    display:flex;align-items:center;justify-content:center;color:#fff;
+    font-size:.9rem;font-weight:700;flex-shrink:0;
+  }
+  .trust__list strong{display:block;color:var(--forest);font-family:'Fraunces',serif;font-size:1.1rem;font-weight:500;margin-bottom:2px}
+  .trust__list span{color:var(--slate);font-size:.92rem}
+
+  /* AREAS */
+  .areas{padding:100px 5vw;background:var(--cream)}
+  .areas__inner{max-width:1200px;margin:0 auto;text-align:center}
+  .areas h2{font-size:clamp(2rem,3.5vw,2.6rem);margin-bottom:18px}
+  .areas p{color:var(--slate);max-width:600px;margin:0 auto 40px}
+  .areas__tags{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .area-tag{
+    padding:10px 20px;background:#fff;border:1px solid var(--border);
+    border-radius:999px;font-size:.92rem;color:var(--forest);
+    transition:background .2s, color .2s;
+  }
+  .area-tag:hover{background:var(--forest);color:#fff;border-color:var(--forest)}
+
+  /* CTA */
+  .cta{padding:100px 5vw;background:var(--forest-deep);color:#fff;text-align:center;position:relative;overflow:hidden}
+  .cta::before,.cta::after{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,var(--rose) 0%, transparent 70%);opacity:.18}
+  .cta::before{top:-170px;left:-120px}
+  .cta::after{bottom:-170px;right:-120px}
+  .cta__inner{max-width:780px;margin:0 auto;position:relative;z-index:1}
+  .cta h2{font-size:clamp(2rem,4vw,3.4rem);color:#fff;margin-bottom:20px}
+  .cta h2 em{font-style:italic;color:var(--rose)}
+  .cta p{font-size:1.1rem;opacity:.88;margin-bottom:38px}
+  .cta__buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  @media (max-width: 960px){
+    .intro__grid{grid-template-columns:1fr;gap:30px}
+    .main-services__grid{grid-template-columns:1fr}
+    .process__steps{grid-template-columns:1fr 1fr;gap:20px}
+    .trust__inner{grid-template-columns:1fr;gap:40px}
+    .trust__media{height:380px}
+  }
+  @media (max-width: 540px){
+    .process__steps{grid-template-columns:1fr}
+    .intro__stats{grid-template-columns:1fr;gap:24px}
+    .hero{min-height:560px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav transparent" id="nav">
+  <a href="index.html" class="nav__logo">
+    <img src="logo.png" alt="S&G Trädgårdservice logotyp">
+    <span class="nav__logo-text">S&G Trädgårdservice<small>Stockholm</small></span>
+  </a>
+  <ul class="nav__menu">
+    <li><a href="index.html" class="active">Hem</a></li>
+    <li><a href="tjanster.html">Tjänster</a></li>
+    <li><a href="offert.html">Prisuppskattning</a></li>
+    <li><a href="kontakt.html">Kontakt</a></li>
+  </ul>
+  <a href="offert.html" class="nav__cta">Gratis offert →</a>
+  <button class="nav__burger" id="burger" aria-label="Öppna meny">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav__mobile" id="mobileMenu">
+  <a href="index.html">Hem</a>
+  <a href="tjanster.html">Tjänster</a>
+  <a href="offert.html">Prisuppskattning</a>
+  <a href="kontakt.html">Kontakt</a>
+  <a href="offert.html" class="cta">Gratis offert</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <video class="hero__video" autoplay muted loop playsinline>
+    <source src="etni-hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero__overlay"></div>
+  <div class="hero__content">
+    <div class="hero__eyebrow">Trädgård · Mark · Snöröjning</div>
+    <h1 class="hero__title">Din trädgård,<br><em>vår passion.</em></h1>
+    <p class="hero__sub">
+      Ett komplett trädgårds- och markföretag i södra Stockholm. Vi tar hand om din utemiljö året runt – med yrkesskicklighet, moderna maskiner och upp till 5 års garanti på vårt arbete.
+    </p>
+    <div class="hero__actions">
+      <a href="offert.html" class="btn btn--primary">Få gratis prisuppskattning →</a>
+      <a href="tjanster.html" class="btn btn--ghost">Se våra tjänster</a>
+    </div>
+  </div>
+  <div class="hero__scroll">Scrolla ner</div>
+</section>
+
+<!-- ============ INTRO ============ -->
+<section class="intro">
+  <div class="intro__grid">
+    <div>
+      <div class="section-label">Om S&G Trädgårdservice</div>
+      <h2 class="intro__title">Ett komplett markföretag i <em class="accent">södra Stockholm.</em></h2>
+    </div>
+    <div>
+      <p class="intro__text">
+        Vi är ett etablerat trädgårds- och markföretag med huvudkontor i Göteborg. Vårt arbetsområde sträcker sig över hela Västra Götaland – från Göteborg och Mölndal till Partille och Öckerö.
+      </p>
+      <p class="intro__text">
+        Vår personal har bred kompetens inom markanläggning, trädvård, växter, vattenanläggningar och vinterunderhåll. Vi tar fullt ansvar för det vi utför och lämnar 1–5 års garanti på växter och arbete.
+      </p>
+      <div class="intro__stats">
+        <div>
+          <div class="stat__num">15+</div>
+          <div class="stat__label">Års erfarenhet</div>
+        </div>
+        <div>
+          <div class="stat__num">1–5 år</div>
+          <div class="stat__label">Garanti på arbete</div>
+        </div>
+        <div>
+          <div class="stat__num">24/7</div>
+          <div class="stat__label">Akut snöröjning</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THREE MAIN SERVICES ============ -->
+<section class="main-services">
+  <div class="main-services__head">
+    <div class="section-label center">Våra huvudtjänster</div>
+    <h2>Tre kärnområden – <em class="accent">året runt.</em></h2>
+  </div>
+
+  <div class="main-services__grid">
+
+    <a href="tradgardsskotsel.html" style="text-decoration:none;color:inherit">
+      <article class="ms-card">
+        <div class="ms-card__media ms-card__media--leaf" style="background:none">
+          <img src="tradgardsskotsel-img.jpg" alt="Trädgårdsskötsel" style="width:100%;height:100%;object-fit:cover">
+        </div>
+        <div class="ms-card__body">
+          <h3>Trädgårdsskötsel</h3>
+          <p>Komplett skötsel av din utemiljö – från trädvård och beskärning till anläggning, plantering och stenarbeten. Vi tar fullt ansvar för resultatet.</p>
+          <span class="ms-card__link">Läs mer →</span>
+        </div>
+      </article>
+    </a>
+
+    <a href="grasklippning.html" style="text-decoration:none;color:inherit">
+      <article class="ms-card">
+        <div class="ms-card__media ms-card__media--grass" style="background:none">
+          <img src="grasklippning-img.jpg" alt="Gräsklippning" style="width:100%;height:100%;object-fit:cover">
+        </div>
+        <div class="ms-card__body">
+          <h3>Gräsklippning</h3>
+          <p>Regelbunden klippning som ger tät, frisk och vacker gräsmatta hela säsongen. Skötselavtal med fast pris – ingen gräsmatta är för liten eller för stor.</p>
+          <span class="ms-card__link">Läs mer →</span>
+        </div>
+      </article>
+    </a>
+
+    <a href="snorojning.html" style="text-decoration:none;color:inherit">
+      <article class="ms-card">
+        <div class="ms-card__media ms-card__media--snow" style="background:none">
+          <img src="snorojning-img.jpg" alt="Snöröjning" style="width:100%;height:100%;object-fit:cover">
+        </div>
+        <div class="ms-card__body">
+          <h3>Snöröjning</h3>
+          <p>Snöskottning, plogning och sandning för BRF, företag och privatpersoner. Vi hanterar även istappar från tak och rännor – säkert och tryggt.</p>
+          <span class="ms-card__link">Läs mer →</span>
+        </div>
+      </article>
+    </a>
+
+  </div>
+</section>
+
+<!-- ============ PROCESS / HOW IT WORKS ============ -->
+<section class="process">
+  <div class="process__inner">
+    <div class="process__head">
+      <div class="section-label light center">Så går det till</div>
+      <h2>Fyra enkla steg till en <em>välskött trädgård.</em></h2>
+    </div>
+
+    <div class="process__steps">
+
+      <div class="step">
+        <div class="step__num">01</div>
+        <h3>Kontakta oss</h3>
+        <p>Fyll i vårt offertformulär, ring eller mejla. Vi återkommer inom 24 timmar med en första bedömning.</p>
+      </div>
+
+      <div class="step">
+        <div class="step__num">02</div>
+        <h3>Platsbesök & offert</h3>
+        <p>Vi besöker fastigheten kostnadsfritt, mäter upp och tar fram en tydlig offert utan dolda kostnader.</p>
+      </div>
+
+      <div class="step">
+        <div class="step__num">03</div>
+        <h3>Planering & start</h3>
+        <p>När du godkänt offerten bokar vi in arbetet. Du får en kontaktperson och tydligt schema från start till slut.</p>
+      </div>
+
+      <div class="step">
+        <div class="step__num">04</div>
+        <h3>Uppföljning & garanti</h3>
+        <p>Efter slutfört arbete följer vi upp resultatet. Vi lämnar 1–5 års garanti på växter och utfört arbete.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST ============ -->
+<section class="trust">
+  <div class="trust__inner">
+    <div class="trust__media">
+      <video autoplay muted loop playsinline>
+        <source src="hedge.mp4" type="video/mp4">
+      </video>
+      <div class="trust__media-badge">
+        <strong>1–5 år</strong>
+        <span>garanti på<br>växter och arbete</span>
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Yrkesskicklighet</div>
+      <h2 class="trust__title">Erfaren personal med <em class="accent">rätt utrustning.</em></h2>
+      <p class="trust__text">
+        Vår personal har stor kompetens inom både markanläggning, växter, träd och vattenanläggning. Vi har också en bra maskinpark – inklusive utrustning som många konkurrenter saknar, som stora såmaskiner och utrustning för sprutsådd.
+      </p>
+
+      <ul class="trust__list">
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <strong>Tydliga offerter</strong>
+            <span>Inga dolda kostnader – du betalar endast för det du behöver.</span>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <strong>Miljösmart utrustning</strong>
+            <span>Moderna maskiner med låga utsläpp och miljöanpassade metoder.</span>
+          </div>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <div>
+            <strong>Fullt ansvar</strong>
+            <span>Vi tar totalansvar för material och utfört arbete – med skriftlig garanti.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AREAS ============ -->
+<section class="areas">
+  <div class="areas__inner">
+    <div class="section-label center">Vårt arbetsområde</div>
+    <h2>Vi arbetar i hela <em class="accent">Västra Götaland.</em></h2>
+    <p>Huvudkontor i Göteborg. Vi serverar privatpersoner, bostadsrättsföreningar, samfälligheter och företag i hela Västra Götaland.</p>
+    <div class="areas__tags">
+      <span class="area-tag">Göteborg</span>
+      <span class="area-tag">Mölndal</span>
+      <span class="area-tag">Partille</span>
+      <span class="area-tag">Öckerö</span>
+      <span class="area-tag">+ mer</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAKET ============ -->
+<section class="paket" id="paket">
+  <div class="paket__inner">
+    <div class="section-label center">Skötselpaket</div>
+    <h2 style="text-align:center;font-size:clamp(2rem,4vw,3.2rem);margin-bottom:14px">Välj ett paket som <em class="accent">passar dig.</em></h2>
+    <p style="text-align:center;color:var(--slate);max-width:580px;margin:0 auto 50px">Fyra färdiga skötselpaket för privatpersoner och föreningar. Välj ett paket och vi kontaktar dig för att boka in ett kostnadsfritt platsbesök.</p>
+
+    <div class="paket__grid">
+
+      <div class="paket-card" data-paket="Bas">
+        <div class="paket-card__header">
+          <div class="paket-card__icon">🌱</div>
+          <h3>Bas</h3>
+          <div class="paket-card__tagline">Grundskötsel</div>
+        </div>
+        <ul class="paket-card__features">
+          <li>Gräsklippning varannan vecka</li>
+          <li>Kantklippning</li>
+          <li>Bortforsling av gräs</li>
+        </ul>
+        <div class="paket-card__price">Från <strong>695</strong> kr<small>/besök</small></div>
+        <button class="btn btn--outline paket-card__cta" onclick="valjPaket('Bas')">Välj Bas →</button>
+      </div>
+
+      <div class="paket-card" data-paket="Standard">
+        <div class="paket-card__header">
+          <div class="paket-card__icon">🌿</div>
+          <h3>Standard</h3>
+          <div class="paket-card__tagline">Populärast</div>
+        </div>
+        <ul class="paket-card__features">
+          <li>Gräsklippning varje vecka</li>
+          <li>Kantklippning & kantskärning</li>
+          <li>Gödsling 2×/säsong</li>
+          <li>Bortforsling av gräs</li>
+          <li>Häckklippning 1×/säsong</li>
+        </ul>
+        <div class="paket-card__price">Från <strong>1 295</strong> kr<small>/besök</small></div>
+        <button class="btn btn--primary paket-card__cta" onclick="valjPaket('Standard')">Välj Standard →</button>
+      </div>
+
+      <div class="paket-card paket-card--featured" data-paket="Premium">
+        <div class="paket-card__badge">Rekommenderas</div>
+        <div class="paket-card__header">
+          <div class="paket-card__icon">🌳</div>
+          <h3>Premium</h3>
+          <div class="paket-card__tagline">Komplett skötsel</div>
+        </div>
+        <ul class="paket-card__features">
+          <li>Allt i Standard</li>
+          <li>Vertikalskärning 1×/säsong</li>
+          <li>Rabattvård & ogräsrensning</li>
+          <li>Beskärning av buskar</li>
+          <li>Höst- & vårarbeten</li>
+          <li>Prioriterad kundtjänst</li>
+        </ul>
+        <div class="paket-card__price">Från <strong>1 895</strong> kr<small>/besök</small></div>
+        <button class="btn btn--primary paket-card__cta" onclick="valjPaket('Premium')">Välj Premium →</button>
+      </div>
+
+      <div class="paket-card" data-paket="BRF & Företag">
+        <div class="paket-card__header">
+          <div class="paket-card__icon">🏢</div>
+          <h3>BRF & Företag</h3>
+          <div class="paket-card__tagline">Skräddarsytt avtal</div>
+        </div>
+        <ul class="paket-card__features">
+          <li>Anpassat efter era behov</li>
+          <li>Hela fastigheten</li>
+          <li>Snöröjning ingår (vintersäsong)</li>
+          <li>Regelbunden rapportering</li>
+          <li>Dedikerad kontaktperson</li>
+        </ul>
+        <div class="paket-card__price"><strong>Offert</strong><small> efter platsbesök</small></div>
+        <button class="btn btn--outline paket-card__cta" onclick="valjPaket('BRF & Företag')">Begär offert →</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PAKET MODAL -->
+<div class="paket-modal" id="paketModal" style="display:none">
+  <div class="paket-modal__backdrop" onclick="stangModal()"></div>
+  <div class="paket-modal__box">
+    <button class="paket-modal__close" onclick="stangModal()">✕</button>
+    <h3>Du har valt: <em class="accent" id="valtPaket">–</em></h3>
+    <p style="color:var(--slate);margin-bottom:24px">Fyll i dina uppgifter så kontaktar vi dig inom 24 timmar för att bekräfta och boka platsbesök.</p>
+    <form onsubmit="return skickaPaket(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div class="field"><label>Namn *</label><input type="text" required placeholder="För- och efternamn"></div>
+        <div class="field"><label>Telefon *</label><input type="tel" required placeholder="0700 - 000 000"></div>
+      </div>
+      <div class="field" style="margin-bottom:12px"><label>E-post *</label><input type="email" required placeholder="namn@exempel.se"></div>
+      <div class="field" style="margin-bottom:20px"><label>Adress *</label><input type="text" required placeholder="Gatuadress, postnummer, ort"></div>
+      <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center">Skicka förfrågan →</button>
+    </form>
+    <div class="paket-modal__success" id="paketSuccess" style="display:none">
+      <div style="font-size:2.5rem;margin-bottom:12px">✓</div>
+      <h4>Tack! Vi återkommer inom 24 timmar.</h4>
+    </div>
+  </div>
+</div>
+
+<style>
+.paket{padding:100px 5vw;background:var(--bone)}
+.paket__inner{max-width:1200px;margin:0 auto}
+.paket__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.paket-card{
+  background:#fff;border:1.5px solid var(--border);border-radius:10px;
+  padding:32px 26px;display:flex;flex-direction:column;position:relative;
+  transition:transform .25s, border-color .25s, box-shadow .25s;
+}
+.paket-card:hover{transform:translateY(-5px);border-color:var(--rose);box-shadow:0 14px 36px rgba(15,61,46,.1)}
+.paket-card--featured{border-color:var(--rose);background:linear-gradient(160deg,#fff 70%,rgba(217,122,138,.06))}
+.paket-card__badge{
+  position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  background:var(--rose);color:#fff;font-size:.74rem;font-weight:700;
+  padding:5px 16px;border-radius:999px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
+}
+.paket-card__header{text-align:center;margin-bottom:22px}
+.paket-card__icon{font-size:2.2rem;margin-bottom:10px}
+.paket-card h3{font-size:1.4rem;margin-bottom:4px}
+.paket-card__tagline{font-size:.82rem;color:var(--moss);font-weight:600;text-transform:uppercase;letter-spacing:.12em}
+.paket-card__features{list-style:none;flex:1;margin-bottom:22px}
+.paket-card__features li{padding:7px 0 7px 22px;position:relative;color:var(--slate);font-size:.9rem;border-bottom:1px solid var(--border)}
+.paket-card__features li:last-child{border-bottom:none}
+.paket-card__features li::before{content:"✓";position:absolute;left:0;color:var(--rose);font-weight:700;font-size:.85rem}
+.paket-card__price{text-align:center;font-family:'Fraunces',serif;font-size:1.1rem;color:var(--forest);margin-bottom:18px}
+.paket-card__price strong{font-size:1.9rem}
+.paket-card__price small{font-size:.85rem;color:var(--slate);font-weight:400}
+.paket-card__cta{width:100%;justify-content:center}
+
+/* MODAL */
+.paket-modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px}
+.paket-modal__backdrop{position:absolute;inset:0;background:rgba(8,34,24,.6);backdrop-filter:blur(4px)}
+.paket-modal__box{
+  position:relative;z-index:1;background:#fff;border-radius:12px;padding:40px;
+  max-width:520px;width:100%;max-height:90vh;overflow-y:auto;
+}
+.paket-modal__close{
+  position:absolute;top:16px;right:16px;background:none;border:none;
+  font-size:1.3rem;cursor:pointer;color:var(--slate);
+}
+.paket-modal__success{text-align:center;padding:20px 0;color:var(--forest)}
+.paket-modal__success h4{font-family:'Fraunces',serif;font-size:1.4rem}
+.field label{display:block;font-size:.85rem;font-weight:600;color:var(--forest);margin-bottom:6px}
+.field input{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:6px;font-family:inherit;font-size:.95rem;background:var(--bone)}
+.field input:focus{outline:none;border-color:var(--rose);background:#fff}
+
+@media (max-width:960px){.paket__grid{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.paket__grid{grid-template-columns:1fr}}
+</style>
+
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <div class="cta__inner">
+    <div class="section-label center" style="color:var(--rose)">Kom igång</div>
+    <h2>Redo att förvandla <em>din utemiljö?</em></h2>
+    <p>Få en kostnadsfri prisuppskattning på under 2 minuter eller kontakta oss direkt – vi återkommer inom 24 timmar.</p>
+    <div class="cta__buttons">
+      <a href="offert.html" class="btn btn--primary">Beräkna pris →</a>
+      <a href="tel:0736755564" class="btn btn--ghost">📞 0736 - 755 564</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer__grid">
+    <div class="footer__brand">
+      <h3>S<span>&</span>G Trädgårdservice</h3>
+      <p>Komplett trädgårds- och markföretag i södra Stockholm. Trädgårdsskötsel, gräsklippning, snöröjning och anläggning sedan över 15 år.</p>
+      <div class="footer__social">
+        <a href="https://www.facebook.com/61559721701689/mentions/" aria-label="Facebook" target="_blank" rel="noopener">f</a>
+        <a href="https://www.instagram.com/sg_tradgardsservice/" aria-label="Instagram" target="_blank" rel="noopener">◉</a>
+        <a href="https://www.tiktok.com/@sgtradgardsservice" aria-label="TikTok" target="_blank" rel="noopener">▶</a>
+      </div>
+    </div>
+
+    <div class="footer__col">
+      <h4>Tjänster</h4>
+      <ul>
+        <li><a href="tradgardsskotsel.html">Trädgårdsskötsel</a></li>
+        <li><a href="grasklippning.html">Gräsklippning</a></li>
+        <li><a href="snorojning.html">Snöröjning</a></li>
+        <li><a href="tjanster.html">Alla tjänster</a></li>
+        <li><a href="offert.html">Prisuppskattning</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h4>Områden</h4>
+      <ul>
+        <li>Göteborg (huvudkontor)</li>
+        <li>Mölndal</li>
+        <li>Partille</li>
+        <li>Öckerö</li>
+        <li>Hela Västra Götaland</li>
+      </ul>
+    </div>
+
+    <div class="footer__col footer__contact">
+      <h4>Kontakt</h4>
+      <ul>
+        <li><span class="icon">📍</span> Blidvädersgatan 41D, 41830 Göteborg</li>
+        <li><span class="icon">📞</span> <a href="tel:0736755564">0736 - 755 564</a></li>
+        <li><span class="icon">✉</span> <a href="mailto:info@sgtradgardsservice.se">info@sgtradgardsservice.se</a></li>
+        <li><span class="icon">🕘</span> Mån–fre 07:00–18:00<br>Akut snöröjning 24/7</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <div>© 2026 S&G Trädgårdservice · Org.nr xxxxxx-xxxx</div>
+    <div>Göteborg, Sverige</div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  const burger = document.getElementById('burger');
+  const mobile = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => mobile.classList.toggle('open'));
+  mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobile.classList.remove('open')));
+
+  function valjPaket(namn) {
+    document.getElementById('valtPaket').textContent = namn;
+    document.getElementById('paketSuccess').style.display = 'none';
+    document.getElementById('paketModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function stangModal() {
+    document.getElementById('paketModal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  function skickaPaket(e) {
+    e.preventDefault();
+    e.target.style.display = 'none';
+    document.getElementById('paketSuccess').style.display = 'block';
+    setTimeout(stangModal, 3000);
+    return false;
+  }
+</script>
+
+</body>
+</html>

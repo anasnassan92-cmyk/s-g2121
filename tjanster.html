@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tjänster – S&G Trädgårdservice Stockholm</title>
+<meta name="description" content="Trädgårdsskötsel, gräsklippning och snöröjning i södra Stockholm. Komplett markföretag med 1–5 års garanti." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/png" href="logo.png">
+<style>
+  .services-grid{
+    max-width:1200px;margin:0 auto;
+    display:grid;grid-template-columns:1fr;gap:50px;
+  }
+  .service-row{
+    display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:center;
+    padding:50px;background:#fff;border:1px solid var(--border);border-radius:10px;
+  }
+  .service-row:nth-child(even){grid-template-columns:1.4fr 1fr}
+  .service-row:nth-child(even) .service-row__media{order:2}
+  .service-row__media{
+    height:340px;border-radius:8px;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;color:#fff;
+  }
+  .service-row__media.green{background:linear-gradient(135deg,var(--moss),var(--leaf))}
+  .service-row__media.grass{background:linear-gradient(135deg,#3a6b2f,#6ba055)}
+  .service-row__media.snow{background:linear-gradient(135deg,#3d5a6b,#7a98ab)}
+  .service-row__media svg{width:120px;height:120px;opacity:.95}
+  .service-row h2{font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:18px}
+  .service-row p{color:var(--slate);font-size:1.02rem;margin-bottom:14px}
+  .service-row__tags{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 26px}
+  .service-row__tags span{
+    padding:6px 14px;background:var(--cream);border-radius:999px;
+    font-size:.82rem;color:var(--forest);
+  }
+  @media (max-width:900px){
+    .service-row,.service-row:nth-child(even){grid-template-columns:1fr;padding:30px;gap:30px}
+    .service-row:nth-child(even) .service-row__media{order:0}
+    .service-row__media{height:240px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav__logo">
+    <img src="logo.png" alt="S&G Trädgårdservice logotyp">
+    <span class="nav__logo-text">S&G Trädgårdservice<small>Stockholm</small></span>
+  </a>
+  <ul class="nav__menu">
+    <li><a href="index.html">Hem</a></li>
+    <li><a href="tjanster.html" class="active">Tjänster</a></li>
+    <li><a href="offert.html">Prisuppskattning</a></li>
+    <li><a href="kontakt.html">Kontakt</a></li>
+  </ul>
+  <a href="offert.html" class="nav__cta">Gratis offert →</a>
+  <button class="nav__burger" id="burger" aria-label="Öppna meny"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav__mobile" id="mobileMenu">
+  <a href="index.html">Hem</a>
+  <a href="tjanster.html">Tjänster</a>
+  <a href="offert.html">Prisuppskattning</a>
+  <a href="kontakt.html">Kontakt</a>
+  <a href="offert.html" class="cta">Gratis offert</a>
+</div>
+
+<header class="page-header">
+  <div class="page-header__inner">
+    <div class="page-header__crumbs"><a href="index.html">Hem</a> / Tjänster</div>
+    <h1>Våra <em>tjänster</em></h1>
+    <p class="page-header__sub">Tre kärnområden, en helhetslösning. Vi tar hand om din utemiljö året runt – från trädgårdsskötsel och gräsklippning till snöröjning på vintern.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="services-grid">
+
+    <div class="service-row">
+      <div class="service-row__media green" style="background:none;padding:0">
+        <img src="tradgardsskotsel-img.jpg" alt="Trädgårdsskötsel" style="width:100%;height:100%;object-fit:cover;border-radius:8px">
+      </div>
+      <div>
+        <div class="section-label">01 · Komplett skötsel</div>
+        <h2>Trädgårdsskötsel</h2>
+        <p>Komplett markföretag för trädgårdsanläggning och renovering av utemiljö. Vi har bred kompetens inom markanläggning, växter, träd och vattenanläggning – och tar fullt ansvar för det vi utför.</p>
+        <div class="service-row__tags">
+          <span>Trädvård</span>
+          <span>Beskärning</span>
+          <span>Plantering</span>
+          <span>Plattläggning</span>
+          <span>Murar</span>
+          <span>Dammar</span>
+          <span>Dränering</span>
+        </div>
+        <a href="tradgardsskotsel.html" class="btn btn--outline">Läs mer om trädgårdsskötsel →</a>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <div class="service-row__media grass" style="background:none;padding:0">
+        <img src="grasklippning-img.jpg" alt="Gräsklippning" style="width:100%;height:100%;object-fit:cover;border-radius:8px">
+      </div>
+      <div>
+        <div class="section-label">02 · Gräs & gräsmatta</div>
+        <h2>Gräsklippning</h2>
+        <p>Vi klipper allt från små gräsplättar till ytor stora som fotbollsplaner. Ekonomiskt fördelaktigt skötselavtal som anpassas efter säsong, väder och gräsets växtkraft.</p>
+        <div class="service-row__tags">
+          <span>Skötselavtal</span>
+          <span>Kantklippning</span>
+          <span>Vertikalskärning</span>
+          <span>Robotunderhåll</span>
+          <span>Gödsling</span>
+          <span>Sprutsådd</span>
+        </div>
+        <a href="grasklippning.html" class="btn btn--outline">Läs mer om gräsklippning →</a>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <div class="service-row__media snow" style="background:none;padding:0">
+        <img src="snorojning-img.jpg" alt="Snöröjning" style="width:100%;height:100%;object-fit:cover;border-radius:8px">
+      </div>
+      <div>
+        <div class="section-label">03 · Vinterunderhåll</div>
+        <h2>Snöröjning</h2>
+        <p>Snöskottning, plogning och sandning i hela Stor-Stockholm – med fokus på södra sidan. Vi tar oss an både stora och små jobb, för BRF, fastighetsägare och privatpersoner.</p>
+        <div class="service-row__tags">
+          <span>Snöskottning</span>
+          <span>Plogning</span>
+          <span>Sandning</span>
+          <span>Takskottning</span>
+          <span>Borttagning av istappar</span>
+          <span>Avtal hela säsongen</span>
+        </div>
+        <a href="snorojning.html" class="btn btn--outline">Läs mer om snöröjning →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section section--cream" style="text-align:center">
+  <div class="section__inner">
+    <div class="section-label center">Vill du komma igång?</div>
+    <h2 style="font-size:clamp(2rem,3.5vw,2.8rem);margin-bottom:18px">Få ett pris på under <em class="accent">2 minuter.</em></h2>
+    <p style="max-width:580px;margin:0 auto 32px;color:var(--slate)">Använd vår prisuppskattare för en första bedömning eller kontakta oss direkt för en skräddarsydd offert.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="offert.html" class="btn btn--primary">Beräkna pris →</a>
+      <a href="kontakt.html" class="btn btn--outline">Kontakta oss</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer__grid">
+    <div class="footer__brand">
+      <h3>S<span>&</span>G Trädgårdservice</h3>
+      <p>Komplett trädgårds- och markföretag i södra Stockholm.</p>
+      <div class="footer__social">
+        <a href="https://www.facebook.com/61559721701689/mentions/" target="_blank" rel="noopener">f</a><a href="https://www.instagram.com/sg_tradgardsservice/" target="_blank" rel="noopener">◉</a><a href="https://www.tiktok.com/@sgtradgardsservice" target="_blank" rel="noopener">▶</a>
+      </div>
+    </div>
+    <div class="footer__col">
+      <h4>Tjänster</h4>
+      <ul>
+        <li><a href="tradgardsskotsel.html">Trädgårdsskötsel</a></li>
+        <li><a href="grasklippning.html">Gräsklippning</a></li>
+        <li><a href="snorojning.html">Snöröjning</a></li>
+        <li><a href="offert.html">Prisuppskattning</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Områden</h4>
+      <ul>
+        <li>Göteborg (huvudkontor)</li>
+        <li>Mölndal</li>
+        <li>Partille</li>
+        <li>Öckerö</li>
+      </ul>
+    </div>
+    <div class="footer__col footer__contact">
+      <h4>Kontakt</h4>
+      <ul>
+        <li><span class="icon">📍</span> Blidvädersgatan 41D, 41830 Göteborg</li>
+        <li><span class="icon">📞</span> <a href="tel:0736755564">0736 - 755 564</a></li>
+        <li><span class="icon">✉</span> <a href="mailto:info@sgtradgardsservice.se">info@sgtradgardsservice.se</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div>© 2026 S&G Trädgårdservice</div>
+    <div>Göteborg, Sverige</div>
+  </div>
+</footer>
+
+<script>
+  const burger=document.getElementById('burger');
+  const mobile=document.getElementById('mobileMenu');
+  burger.addEventListener('click',()=>mobile.classList.toggle('open'));
+  mobile.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobile.classList.remove('open')));
+</script>
+</body>
+</html>

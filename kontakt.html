@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kontakta oss – S&G Trädgårdservice Stockholm</title>
+<meta name="description" content="Kontakta S&G Trädgårdservice för trädgårdsskötsel, gräsklippning eller snöröjning i södra Stockholm. Ring 0736 - 755 564 eller skicka offertförfrågan." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/png" href="logo.png">
+<style>
+  .contact-grid{
+    max-width:1200px;margin:0 auto;padding:80px 5vw;
+    display:grid;grid-template-columns:1fr 1.2fr;gap:60px;
+  }
+
+  /* CONTACT CARDS */
+  .contact-cards{display:grid;gap:18px;margin-bottom:30px}
+  .contact-card{
+    background:#fff;border:1px solid var(--border);border-radius:8px;
+    padding:24px;display:flex;gap:18px;align-items:flex-start;
+    transition:border-color .2s, transform .2s;
+  }
+  .contact-card:hover{border-color:var(--rose);transform:translateY(-2px)}
+  .contact-card__icon{
+    width:48px;height:48px;border-radius:8px;background:var(--cream);
+    display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;
+  }
+  .contact-card h3{font-size:1.05rem;margin-bottom:4px;font-family:'Inter',sans-serif;font-weight:600;color:var(--forest)}
+  .contact-card p,.contact-card a{font-size:.95rem;color:var(--slate);text-decoration:none;margin-bottom:2px;display:block}
+  .contact-card a{color:var(--rose);font-weight:600}
+  .contact-card a:hover{text-decoration:underline}
+
+  .hours-card{
+    background:var(--forest);color:#fff;border-radius:8px;padding:28px;
+  }
+  .hours-card h3{color:#fff;font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:18px}
+  .hours-card table{width:100%;border-collapse:collapse}
+  .hours-card td{padding:8px 0;font-size:.93rem;color:rgba(255,255,255,.85);border-bottom:1px solid rgba(255,255,255,.1)}
+  .hours-card td:last-child{text-align:right;font-weight:600;color:#fff}
+  .hours-card tr:last-child td{border-bottom:none}
+  .hours-card__note{
+    margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.15);
+    font-size:.88rem;color:var(--sage);
+  }
+
+  /* FORM */
+  .form-card{
+    background:#fff;border:1px solid var(--border);border-radius:10px;padding:40px;
+  }
+  .form-card h2{font-size:clamp(1.6rem,2.5vw,2rem);margin-bottom:8px}
+  .form-card>p{color:var(--slate);margin-bottom:28px;font-size:.97rem}
+
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:.85rem;font-weight:600;color:var(--forest);margin-bottom:8px;letter-spacing:.02em}
+  .field input,.field select,.field textarea{
+    width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:6px;
+    font-family:inherit;font-size:.96rem;color:var(--ink);background:var(--bone);
+    transition:border-color .2s, background .2s;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{
+    outline:none;border-color:var(--rose);background:#fff;
+  }
+  .field textarea{resize:vertical;min-height:120px}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .submit-row{display:flex;align-items:center;gap:16px;margin-top:24px;flex-wrap:wrap}
+  .privacy-note{font-size:.82rem;color:var(--slate);flex:1;min-width:200px}
+
+  /* FAQ */
+  .faq{background:var(--cream);padding:80px 5vw}
+  .faq__inner{max-width:840px;margin:0 auto}
+  .faq__head{text-align:center;margin-bottom:50px}
+  .faq__head h2{font-size:clamp(2rem,3.5vw,2.6rem)}
+  details{
+    background:#fff;border:1px solid var(--border);border-radius:8px;
+    padding:20px 24px;margin-bottom:12px;cursor:pointer;
+    transition:border-color .2s;
+  }
+  details[open]{border-color:var(--rose)}
+  summary{
+    font-family:'Fraunces',serif;font-size:1.1rem;color:var(--forest);font-weight:500;
+    list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{
+    content:"+";font-size:1.6rem;color:var(--rose);transition:transform .2s;
+    font-family:'Inter',sans-serif;line-height:1;
+  }
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--slate);font-size:.96rem;margin-top:14px;line-height:1.65}
+
+  /* SUCCESS MSG */
+  .form-success{
+    display:none;background:var(--moss);color:#fff;padding:30px;border-radius:8px;text-align:center;
+  }
+  .form-success.show{display:block}
+  .form-success h3{color:#fff;font-family:'Fraunces',serif;font-size:1.6rem;margin-bottom:10px}
+
+  @media (max-width:900px){
+    .contact-grid{grid-template-columns:1fr;gap:40px}
+    .field-row{grid-template-columns:1fr}
+    .form-card{padding:28px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav__logo">
+    <img src="logo.png" alt="S&G Trädgårdservice logotyp">
+    <span class="nav__logo-text">S&G Trädgårdservice<small>Stockholm</small></span>
+  </a>
+  <ul class="nav__menu">
+    <li><a href="index.html">Hem</a></li>
+    <li><a href="tjanster.html">Tjänster</a></li>
+    <li><a href="offert.html">Prisuppskattning</a></li>
+    <li><a href="kontakt.html" class="active">Kontakt</a></li>
+  </ul>
+  <a href="offert.html" class="nav__cta">Gratis offert →</a>
+  <button class="nav__burger" id="burger" aria-label="Öppna meny"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav__mobile" id="mobileMenu">
+  <a href="index.html">Hem</a><a href="tjanster.html">Tjänster</a>
+  <a href="offert.html">Prisuppskattning</a><a href="kontakt.html">Kontakt</a>
+  <a href="offert.html" class="cta">Gratis offert</a>
+</div>
+
+<header class="page-header">
+  <div class="page-header__inner">
+    <div class="page-header__crumbs"><a href="index.html">Hem</a> / Kontakt</div>
+    <h1>Vi finns här när du <em>behöver oss</em></h1>
+    <p class="page-header__sub">Ring, mejla eller skicka in en offertförfrågan – vi återkommer inom 24 timmar på vardagar. Akut snöröjning hanterar vi dygnet runt.</p>
+  </div>
+</header>
+
+<section style="background:var(--bone)">
+  <div class="contact-grid">
+
+    <!-- LEFT: contact info -->
+    <div>
+      <div class="section-label">Kontaktuppgifter</div>
+      <h2 style="font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:30px">Tre snabba sätt att <em class="accent">nå oss.</em></h2>
+
+      <div class="contact-cards">
+
+        <div class="contact-card">
+          <div class="contact-card__icon">📞</div>
+          <div>
+            <h3>Telefon</h3>
+            <p>Snabbast under kontorstid – vi svarar gärna direkt.</p>
+            <a href="tel:0736755564">0736 - 755 564</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card__icon">✉️</div>
+          <div>
+            <h3>E-post</h3>
+            <p>Svar inom 24 timmar på vardagar.</p>
+            <a href="mailto:info@sgtradgardsservice.se">info@sgtradgardsservice.se</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card__icon">📍</div>
+          <div>
+            <h3>Huvudkontor</h3>
+            <p>Vi arbetar i hela Västra Götaland.</p>
+            <a>Blidvädersgatan 41D, 41830 Göteborg</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="hours-card">
+        <h3>Öppettider</h3>
+        <table>
+          <tr><td>Måndag – fredag</td><td>07:00 – 18:00</td></tr>
+          <tr><td>Lördag</td><td>09:00 – 14:00</td></tr>
+          <tr><td>Söndag</td><td>Stängt</td></tr>
+          <tr><td>Akut snöröjning</td><td>24/7</td></tr>
+        </table>
+        <div class="hours-card__note">
+          ❄️ Vid snöoväder eller akuta trädgårdsärenden, ring direkt – vi rycker ut även utanför kontorstid.
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: form -->
+    <div>
+      <div class="form-card" id="formCard">
+        <h2>Skicka en <em class="accent">offertförfrågan</em></h2>
+        <p>Beskriv ditt behov så återkommer vi inom 24 timmar med en första bedömning eller bokning av platsbesök.</p>
+
+        <form id="contactForm" onsubmit="return handleContact(event)">
+          <div class="field-row">
+            <div class="field">
+              <label for="name">Namn *</label>
+              <input id="name" name="name" type="text" required placeholder="För- och efternamn">
+            </div>
+            <div class="field">
+              <label for="phone">Telefon *</label>
+              <input id="phone" name="phone" type="tel" required placeholder="0700 - 000 000">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">E-post *</label>
+            <input id="email" name="email" type="email" required placeholder="namn@exempel.se">
+          </div>
+
+          <div class="field">
+            <label for="address">Adress & ort *</label>
+            <input id="address" name="address" type="text" required placeholder="Gatuadress, postnummer, ort">
+          </div>
+
+          <div class="field">
+            <label for="service">Tjänst *</label>
+            <select id="service" name="service" required>
+              <option value="">Välj en tjänst...</option>
+              <option value="tradgardsskotsel">Trädgårdsskötsel</option>
+              <option value="grasklippning">Gräsklippning</option>
+              <option value="snorojning">Snöröjning</option>
+              <option value="annat">Annat / Vet inte än</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Beskriv ditt behov *</label>
+            <textarea id="message" name="message" required placeholder="Beskriv förutsättningar, ungefärligt antal kvadratmeter, önskat startdatum, eventuella särskilda krav..."></textarea>
+          </div>
+
+          <div class="submit-row">
+            <button type="submit" class="btn btn--primary">Skicka förfrågan →</button>
+            <p class="privacy-note">Vi behandlar dina uppgifter konfidentiellt och delar dem aldrig med tredje part.</p>
+          </div>
+        </form>
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        <h3>✓ Tack! Vi har tagit emot din förfrågan.</h3>
+        <p>Vi återkommer inom 24 timmar på vardagar. Behöver du snabbare svar, ring 0736 - 755 564.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="faq__inner">
+    <div class="faq__head">
+      <div class="section-label center">Vanliga frågor</div>
+      <h2>Innan du kontaktar oss</h2>
+    </div>
+
+    <details>
+      <summary>Är offerten verkligen kostnadsfri?</summary>
+      <p>Ja – både offert och platsbesök är helt kostnadsfria och utan förbindelse. Du bestämmer själv om du vill gå vidare efter att du fått vårt förslag.</p>
+    </details>
+
+    <details>
+      <summary>Hur snabbt kan ni komma ut?</summary>
+      <p>För standardärenden under kontorstid bokar vi vanligtvis in platsbesök inom 3–7 arbetsdagar. Vid akut snöröjning rycker vi ut samma dag, dygnet runt under vintersäsongen.</p>
+    </details>
+
+    <details>
+      <summary>Vilka områden i Stockholm arbetar ni i?</summary>
+      <p>Vi har huvudkontor i Göteborg och arbetar primärt i Västra Götaland – inklusive Göteborg, Mölndal, Partille och Öckerö. Vi tar även uppdrag i andra delar av Västra Götaland vid behov.</p>
+    </details>
+
+    <details>
+      <summary>Tar ni emot uppdrag från bostadsrättsföreningar?</summary>
+      <p>Absolut. En stor del av vår verksamhet är skötselavtal med BRF:er, samfälligheter och fastighetsägare. Vi tar fram skräddarsydda avtal som täcker både årstidsbundna och löpande behov.</p>
+    </details>
+
+    <details>
+      <summary>Vilken garanti gäller på arbetet?</summary>
+      <p>Vi lämnar 1–5 års garanti på växter och utfört arbete, beroende på tjänstens karaktär. Detaljer specificeras i offerten innan arbetet påbörjas.</p>
+    </details>
+
+    <details>
+      <summary>Kan ni hjälpa till med material också?</summary>
+      <p>Ja, vi säljer även det material vi själva arbetar med – som växtmaterial, sånings- och gödningsmedel, murar och marksten. Detta kan ingå i offerten om du önskar.</p>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="footer__grid">
+    <div class="footer__brand">
+      <h3>S<span>&</span>G Trädgårdservice</h3>
+      <p>Komplett trädgårds- och markföretag i södra Stockholm.</p>
+      <div class="footer__social"><a href="https://www.facebook.com/61559721701689/mentions/" target="_blank" rel="noopener">f</a><a href="https://www.instagram.com/sg_tradgardsservice/" target="_blank" rel="noopener">◉</a><a href="https://www.tiktok.com/@sgtradgardsservice" target="_blank" rel="noopener">▶</a></div>
+    </div>
+    <div class="footer__col">
+      <h4>Tjänster</h4>
+      <ul>
+        <li><a href="tradgardsskotsel.html">Trädgårdsskötsel</a></li>
+        <li><a href="grasklippning.html">Gräsklippning</a></li>
+        <li><a href="snorojning.html">Snöröjning</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Områden</h4>
+      <ul>
+        <li>Göteborg</li><li>Mölndal</li>
+        <li>Partille</li><li>Öckerö</li>
+      </ul>
+    </div>
+    <div class="footer__col footer__contact">
+      <h4>Kontakt</h4>
+      <ul>
+        <li><span class="icon">📍</span> Blidvädersgatan 41D, 41830 Göteborg</li>
+        <li><span class="icon">📞</span> <a href="tel:0736755564">0736 - 755 564</a></li>
+        <li><span class="icon">✉</span> <a href="mailto:info@sgtradgardsservice.se">info@sgtradgardsservice.se</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom"><div>© 2026 S&G Trädgårdservice</div><div>Göteborg, Sverige</div></div>
+</footer>
+
+<script>
+  const burger=document.getElementById('burger');const mobile=document.getElementById('mobileMenu');
+  burger.addEventListener('click',()=>mobile.classList.toggle('open'));
+  mobile.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobile.classList.remove('open')));
+
+  function handleContact(e){
+    e.preventDefault();
+    document.getElementById('formCard').style.display='none';
+    document.getElementById('formSuccess').classList.add('show');
+    window.scrollTo({top:document.getElementById('formSuccess').offsetTop-100,behavior:'smooth'});
+    return false;
+  }
+</script>
+</body>
+</html>
