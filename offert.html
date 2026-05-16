@@ -7,9 +7,9 @@
 <meta name="description" content="Få en kostnadsfri prisuppskattning för trädgårdsskötsel, gräsklippning eller snöröjning på under 2 minuter." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<link rel="icon" type="image/png" href="logo.png">
+<link rel="icon" type="image/png" href="S_G.png">
 <style>
   .estimator{padding:60px 5vw 100px;background:var(--bone)}
   .estimator__inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start}
@@ -24,7 +24,7 @@
   .progress__step.active{background:var(--rose)}
   .progress__step.done{background:var(--moss)}
   .progress__label{font-size:.82rem;color:var(--slate);margin-top:14px;display:flex;justify-content:space-between;align-items:center}
-  .progress__label strong{color:var(--forest);font-family:'Inter',sans-serif}
+  .progress__label strong{color:var(--forest);font-family:'Outfit',sans-serif}
 
   /* CARD */
   .step-card{
@@ -48,7 +48,7 @@
     display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;
   }
   .choice.selected .choice__icon{background:var(--rose);color:#fff}
-  .choice h4{font-size:1.1rem;color:var(--forest);margin-bottom:4px;font-family:'Inter',sans-serif;font-weight:600}
+  .choice h4{font-size:1.1rem;color:var(--forest);margin-bottom:4px;font-family:'Outfit',sans-serif;font-weight:600}
   .choice p{font-size:.88rem;color:var(--slate);margin:0}
 
   /* FORM FIELDS */
@@ -56,7 +56,7 @@
   .field label{display:block;font-size:.85rem;font-weight:600;color:var(--forest);margin-bottom:8px}
   .field input,.field select,.field textarea{
     width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:6px;
-    font-family:inherit;font-size:.96rem;color:var(--ink);background:var(--bone);
+    font-family:'Outfit',sans-serif;font-size:.96rem;color:var(--ink);background:var(--bone);
     transition:border-color .2s, background .2s;
   }
   .field input:focus,.field select:focus,.field textarea:focus{
@@ -80,7 +80,7 @@
   /* SIZE SLIDER */
   .slider-wrap{margin:24px 0}
   .slider-val{
-    font-family:'Fraunces',serif;font-size:2.6rem;color:var(--forest);font-weight:500;
+    font-family:'DM Serif Display',serif;font-size:2.6rem;color:var(--forest);font-weight:500;
     text-align:center;margin-bottom:8px;line-height:1;
   }
   .slider-val small{font-size:1.1rem;color:var(--slate);font-weight:400}
@@ -117,10 +117,10 @@
     position:sticky;top:100px;background:var(--forest);color:#fff;
     border-radius:10px;padding:36px;
   }
-  .quote-sidebar h3{color:#fff;font-size:1.2rem;margin-bottom:6px;font-family:'Inter',sans-serif;font-weight:600;letter-spacing:.02em}
+  .quote-sidebar h3{color:#fff;font-size:1.2rem;margin-bottom:6px;font-family:'Outfit',sans-serif;font-weight:600;letter-spacing:.02em}
   .quote-sidebar__sub{color:rgba(255,255,255,.65);font-size:.88rem;margin-bottom:24px}
   .quote__total{
-    font-family:'Fraunces',serif;font-size:3.2rem;color:#fff;font-weight:500;line-height:1;margin-bottom:6px;
+    font-family:'DM Serif Display',serif;font-size:3.2rem;color:#fff;font-weight:500;line-height:1;margin-bottom:6px;
   }
   .quote__total small{font-size:1.4rem;color:var(--sage);font-weight:400}
   .quote__period{color:var(--sage);font-size:.88rem;margin-bottom:6px}
@@ -145,7 +145,7 @@
 
   /* SUMMARY (final) */
   .summary-box{background:var(--cream);border-radius:8px;padding:24px;margin-bottom:24px}
-  .summary-box h4{font-family:'Inter',sans-serif;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:12px;font-weight:600}
+  .summary-box h4{font-family:'Outfit',sans-serif;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:12px;font-weight:600}
   .summary-box ul{list-style:none}
   .summary-box li{padding:6px 0;display:flex;justify-content:space-between;font-size:.93rem;color:var(--slate);border-bottom:1px solid var(--border)}
   .summary-box li:last-child{border-bottom:none}
@@ -163,7 +163,7 @@
   .success h2{font-size:2rem;margin-bottom:14px}
   .success p{color:var(--slate);margin-bottom:8px}
   .success__price{
-    font-family:'Fraunces',serif;font-size:2.6rem;color:var(--forest);font-weight:500;
+    font-family:'DM Serif Display',serif;font-size:2.6rem;color:var(--forest);font-weight:500;
     margin:24px 0;
   }
   .success__buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
@@ -180,8 +180,8 @@
 
 <nav class="nav" id="nav">
   <a href="index.html" class="nav__logo">
-    <img src="logo.png" alt="S&G Trädgårdservice logotyp">
-    <span class="nav__logo-text">S&G Trädgårdservice<small>Stockholm</small></span>
+    <img src="S_G.png" style="height:60px;width:auto">
+    <span class="nav__logo-text">S&G Trädgårdservice</span>
   </a>
   <ul class="nav__menu">
     <li><a href="index.html">Hem</a></li>
@@ -230,6 +230,13 @@
         <p>Välj det område som passar bäst. Du kan ändra senare.</p>
 
         <div class="choice-grid">
+          <div class="choice" data-service="hackklippning">
+            <div class="choice__icon">🌿</div>
+            <div>
+              <h4>Häckklippning</h4>
+              <p>Jämn och fin häck, formklippning, bortforsling. Från 450 kr/h.</p>
+            </div>
+          </div>
           <div class="choice" data-service="grasklippning">
             <div class="choice__icon">🌿</div>
             <div>
@@ -393,12 +400,23 @@
   <div class="footer__grid">
     <div class="footer__brand">
       <h3>S<span>&</span>G Trädgårdservice</h3>
-      <p>Komplett trädgårds- och markföretag i södra Stockholm.</p>
-      <div class="footer__social"><a href="https://www.facebook.com/61559721701689/mentions/" target="_blank" rel="noopener">f</a><a href="https://www.instagram.com/sg_tradgardsservice/" target="_blank" rel="noopener">◉</a><a href="https://www.tiktok.com/@sgtradgardsservice" target="_blank" rel="noopener">▶</a></div>
+      <p>Komplett trädgårds- och markföretag i Halland.</p>
+      <div class="footer__social">
+        <a href="https://www.facebook.com/61559721701689/mentions/" aria-label="Facebook" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/sg_tradgardsservice/" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@sgtradgardsservice" aria-label="TikTok" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+        </a>
+      </div>
     </div>
     <div class="footer__col">
       <h4>Tjänster</h4>
       <ul>
+        <li><a href="hackklippning.html">Häckklippning</a></li>
         <li><a href="tradgardsskotsel.html">Trädgårdsskötsel</a></li>
         <li><a href="grasklippning.html">Gräsklippning</a></li>
         <li><a href="snorojning.html">Snöröjning</a></li>
@@ -407,20 +425,23 @@
     <div class="footer__col">
       <h4>Områden</h4>
       <ul>
-        <li>Göteborg</li><li>Mölndal</li>
-        <li>Partille</li><li>Öckerö</li>
+        <li>Halmstad (huvudkontor)</li>
+        <li>Falkenberg, Varberg &amp; Laholm</li>
+        <li>Kungsbacka &amp; Hylte</li>
+        <li>Göteborg, Mölndal &amp; Partille</li>
+        <li>Öckerö &amp; Västra Götaland</li>
       </ul>
     </div>
     <div class="footer__col footer__contact">
       <h4>Kontakt</h4>
       <ul>
-        <li><span class="icon">📍</span> Blidvädersgatan 41D, 41830 Göteborg</li>
+        <li><span class="icon">📍</span> Andersbergsringen 207, Halmstad</li>
         <li><span class="icon">📞</span> <a href="tel:0736755564">0736 - 755 564</a></li>
         <li><span class="icon">✉</span> <a href="mailto:info@sgtradgardsservice.se">info@sgtradgardsservice.se</a></li>
       </ul>
     </div>
   </div>
-  <div class="footer__bottom"><div>© 2026 S&G Trädgårdservice</div><div>Göteborg, Sverige</div></div>
+  <div class="footer__bottom"><div>© 2026 S&G Trädgårdservice</div><div>Halmstad, Sverige</div></div>
 </footer>
 
 <script>
@@ -429,6 +450,32 @@
    All prices are estimates in SEK ex VAT.
    ========================================= */
 const SERVICES = {
+  hackklippning: {
+    name: 'Häckklippning',
+    icon: '🌿',
+    sizeUnit: 'löpmeter',
+    sizeMin: 5, sizeMax: 200, sizeDefault: 30,
+    sizeLabels: [
+      {max:10,  label:'Kort häck'},
+      {max:30,  label:'Mellanlång häck'},
+      {max:80,  label:'Längre häck'},
+      {max:150, label:'Stor fastighet'},
+      {max:9999,label:'Kommersiell anläggning'}
+    ],
+    base: 450,
+    perSqm: 8,
+    frequencies: [
+      {id:'once', label:'Engångsbesök', sub:'En klippning', visitsPerYear:1, mult:1.0},
+      {id:'twice', label:'2 gånger/säsong', sub:'Vår + sommar', visitsPerYear:2, mult:0.95},
+      {id:'three', label:'3 gånger/säsong', sub:'Regelbunden skötsel', visitsPerYear:3, mult:0.90}
+    ],
+    defaultFreq: 'once',
+    period: 'per säsong',
+    extras: [
+      {id:'bort', label:'Bortforsling av klipp', sub:'Vi tar med materialet', price:200, perVisit:true},
+      {id:'form', label:'Formklippning', sub:'Precision & detalj', price:300, perVisit:true}
+    ]
+  },
   grasklippning: {
     name: 'Gräsklippning',
     icon: '🌿',

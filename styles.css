@@ -1,33 +1,37 @@
 /* ============================================
    S&G Trädgårdservice - Shared Stylesheet
+   Logo-matched identity: forest green + leaf green
    ============================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap');
+
 :root{
-  --forest: #0f3d2e;
-  --forest-deep: #082218;
-  --moss: #2d5a3d;
-  --leaf: #5a8f4a;
-  --sage: #b8c9a6;
-  --cream: #f5f1e8;
-  --bone: #faf8f2;
-  --ink: #1a1f1c;
-  --slate: #4a5650;
-  --rose: #d97a8a;
-  --rose-deep: #c66578;
-  --gold: #c89b3c;
-  --border: rgba(15, 61, 46, 0.12);
+  /* Logo-exact greens */
+  --forest: #005028;        /* dark logo green */
+  --forest-deep: #002e17;   /* deeper shade */
+  --moss: #006428;          /* primary logo green */
+  --leaf: #78b43c;          /* bright leaf logo green */
+  --sage: #b8d98a;          /* light leaf tint */
+  --cream: #f0f7ec;         /* green-tinted light bg */
+  --bone: #f7fbf4;          /* very light green-white */
+  --ink: #0e1f14;           /* near-black with green tone */
+  --slate: #3d5445;         /* green-toned body text */
+  --rose: #78b43c;          /* accent = bright leaf green (replaces pink) */
+  --rose-deep: #5a9424;     /* darker leaf accent */
+  --gold: #a8c840;          /* light yellow-green accent */
+  --border: rgba(0, 100, 40, 0.14);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  font-family:'Inter', -apple-system, sans-serif;
+  font-family:'Outfit', -apple-system, sans-serif;
   color:var(--ink);
   background:var(--bone);
   line-height:1.65;
   overflow-x:hidden;
 }
-h1,h2,h3,h4,h5{font-family:'Fraunces',Georgia,serif;font-weight:500;line-height:1.15;letter-spacing:-0.02em;color:var(--forest)}
+h1,h2,h3,h4,h5{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-height:1.15;letter-spacing:-0.01em;color:var(--forest)}
 em.accent{font-style:italic;color:var(--rose);font-weight:400}
 a{color:var(--moss)}
 img{max-width:100%;display:block}
@@ -58,8 +62,8 @@ img{max-width:100%;display:block}
 .nav.transparent.scrolled .nav__menu a{color:var(--forest)}
 
 .nav__logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.nav__logo img{height:42px;width:auto}
-.nav__logo-text{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:600;color:var(--forest);letter-spacing:-0.01em;line-height:1.1}
+.nav__logo img{height:56px;width:auto}
+.nav__logo-text{font-family:'DM Serif Display',serif;font-size:1.15rem;font-weight:600;color:var(--forest);letter-spacing:-0.01em;line-height:1.1}
 .nav__logo-text small{display:block;font-size:0.65rem;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;opacity:0.7;margin-top:2px}
 
 .nav__menu{display:flex;gap:30px;list-style:none;align-items:center}
@@ -93,9 +97,9 @@ img{max-width:100%;display:block}
 }
 .nav__mobile.open{transform:translateX(0)}
 .nav__mobile a{
-  color:#fff;text-decoration:none;font-family:'Fraunces',serif;font-size:1.6rem;
+  color:#fff;text-decoration:none;font-family:'DM Serif Display',serif;font-size:1.6rem;
 }
-.nav__mobile a.cta{background:var(--rose);padding:14px 28px;border-radius:999px;font-size:1.1rem;font-family:'Inter',sans-serif;font-weight:600}
+.nav__mobile a.cta{background:var(--rose);padding:14px 28px;border-radius:999px;font-size:1.1rem;font-family:'Outfit',sans-serif;font-weight:600}
 
 /* ============ PAGE HEADER (sub-pages) ============ */
 .page-header{
@@ -134,7 +138,7 @@ img{max-width:100%;display:block}
   padding:14px 28px;border-radius:999px;text-decoration:none;font-weight:600;
   font-size:.95rem;display:inline-flex;align-items:center;gap:10px;
   transition:transform .2s, background .2s, color .2s, border-color .2s;
-  border:none;cursor:pointer;font-family:'Inter',sans-serif;
+  border:none;cursor:pointer;font-family:'Outfit',sans-serif;
 }
 .btn--primary{background:var(--rose);color:#fff}
 .btn--primary:hover{background:var(--rose-deep);transform:translateY(-2px)}
@@ -148,10 +152,10 @@ img{max-width:100%;display:block}
 /* ============ FOOTER ============ */
 footer{background:var(--forest);color:rgba(255,255,255,.8);padding:80px 5vw 30px;margin-top:auto}
 .footer__grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:50px;margin-bottom:50px}
-.footer__brand h3{font-family:'Fraunces',serif;color:#fff;font-size:1.5rem;margin-bottom:14px;font-weight:500}
+.footer__brand h3{font-family:'DM Serif Display',serif;color:#fff;font-size:1.5rem;margin-bottom:14px;font-weight:500}
 .footer__brand h3 span{color:var(--rose)}
 .footer__brand p{font-size:.93rem;opacity:.75;max-width:300px;margin-bottom:18px}
-.footer__col h4{color:#fff;font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:18px;font-family:'Inter',sans-serif;font-weight:600}
+.footer__col h4{color:#fff;font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:18px;font-family:'Outfit',sans-serif;font-weight:600}
 .footer__col ul{list-style:none}
 .footer__col li{padding:5px 0;font-size:.93rem}
 .footer__col a{color:rgba(255,255,255,.7);text-decoration:none;transition:color .2s}
